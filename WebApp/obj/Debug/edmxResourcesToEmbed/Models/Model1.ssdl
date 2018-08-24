@@ -1,0 +1,109 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Schema Namespace="CoreToWorkflowModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+  <EntityType Name="tableEstatus">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="idTableWorkflow" Type="int" />
+    <Property Name="Name" Type="nvarchar" MaxLength="500" />
+    <Property Name="Description" Type="nvarchar" MaxLength="500" />
+  </EntityType>
+  <EntityType Name="tableTasks">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="TaskFunction" Type="nvarchar" MaxLength="500" />
+    <Property Name="IdTableEstatus" Type="int" />
+    <Property Name="Description" Type="nvarchar" MaxLength="500" />
+    <Property Name="IdTableWorkflow" Type="int" />
+  </EntityType>
+  <EntityType Name="tableTracks">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="CurrentTime" Type="nvarchar" MaxLength="500" />
+    <Property Name="IdTableWorkflow" Type="int" />
+  </EntityType>
+  <EntityType Name="tableWorkflow">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="Name" Type="nvarchar" MaxLength="500" />
+    <Property Name="Description" Type="nvarchar" MaxLength="500" />
+    <Property Name="Duration" Type="time" Precision="7" />
+  </EntityType>
+  <Association Name="FK_TableEstatus_TableWorkflow">
+    <End Role="tableWorkflow" Type="Self.tableWorkflow" Multiplicity="0..1" />
+    <End Role="tableEstatus" Type="Self.tableEstatus" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="tableWorkflow">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="tableEstatus">
+        <PropertyRef Name="idTableWorkflow" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_tableTasks_TableEstatus">
+    <End Role="tableEstatus" Type="Self.tableEstatus" Multiplicity="0..1" />
+    <End Role="tableTasks" Type="Self.tableTasks" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="tableEstatus">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="tableTasks">
+        <PropertyRef Name="IdTableEstatus" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_tableTasks_TableWorkflow">
+    <End Role="tableWorkflow" Type="Self.tableWorkflow" Multiplicity="0..1" />
+    <End Role="tableTasks" Type="Self.tableTasks" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="tableWorkflow">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="tableTasks">
+        <PropertyRef Name="IdTableWorkflow" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_tableTrack_TableWorkflow">
+    <End Role="tableWorkflow" Type="Self.tableWorkflow" Multiplicity="0..1" />
+    <End Role="tableTracks" Type="Self.tableTracks" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="tableWorkflow">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="tableTracks">
+        <PropertyRef Name="IdTableWorkflow" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <EntityContainer Name="CoreToWorkflowModelStoreContainer">
+    <EntitySet Name="tableEstatus" EntityType="Self.tableEstatus" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="tableTasks" EntityType="Self.tableTasks" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="tableTracks" EntityType="Self.tableTracks" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="tableWorkflow" EntityType="Self.tableWorkflow" Schema="dbo" store:Type="Tables" />
+    <AssociationSet Name="FK_TableEstatus_TableWorkflow" Association="Self.FK_TableEstatus_TableWorkflow">
+      <End Role="tableWorkflow" EntitySet="tableWorkflow" />
+      <End Role="tableEstatus" EntitySet="tableEstatus" />
+    </AssociationSet>
+    <AssociationSet Name="FK_tableTasks_TableEstatus" Association="Self.FK_tableTasks_TableEstatus">
+      <End Role="tableEstatus" EntitySet="tableEstatus" />
+      <End Role="tableTasks" EntitySet="tableTasks" />
+    </AssociationSet>
+    <AssociationSet Name="FK_tableTasks_TableWorkflow" Association="Self.FK_tableTasks_TableWorkflow">
+      <End Role="tableWorkflow" EntitySet="tableWorkflow" />
+      <End Role="tableTasks" EntitySet="tableTasks" />
+    </AssociationSet>
+    <AssociationSet Name="FK_tableTrack_TableWorkflow" Association="Self.FK_tableTrack_TableWorkflow">
+      <End Role="tableWorkflow" EntitySet="tableWorkflow" />
+      <End Role="tableTracks" EntitySet="tableTracks" />
+    </AssociationSet>
+  </EntityContainer>
+</Schema>

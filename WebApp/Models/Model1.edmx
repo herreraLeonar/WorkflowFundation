@@ -1,0 +1,301 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+  <!-- EF Runtime content -->
+  <edmx:Runtime>
+    <!-- SSDL content -->
+    <edmx:StorageModels>
+    <Schema Namespace="CoreToWorkflowModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+        <EntityType Name="tableEstatus">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="idTableWorkflow" Type="int" />
+          <Property Name="Name" Type="nvarchar" MaxLength="500" />
+          <Property Name="Description" Type="nvarchar" MaxLength="500" />
+        </EntityType>
+        <EntityType Name="tableTasks">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="TaskFunction" Type="nvarchar" MaxLength="500" />
+          <Property Name="IdTableEstatus" Type="int" />
+          <Property Name="Description" Type="nvarchar" MaxLength="500" />
+          <Property Name="IdTableWorkflow" Type="int" />
+        </EntityType>
+        <EntityType Name="tableTracks">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="CurrentTime" Type="nvarchar" MaxLength="500" />
+          <Property Name="IdTableWorkflow" Type="int" />
+        </EntityType>
+        <EntityType Name="tableWorkflow">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Name" Type="nvarchar" MaxLength="500" />
+          <Property Name="Description" Type="nvarchar" MaxLength="500" />
+          <Property Name="Duration" Type="time" Precision="7" />
+        </EntityType>
+        <Association Name="FK_TableEstatus_TableWorkflow">
+          <End Role="tableWorkflow" Type="Self.tableWorkflow" Multiplicity="0..1" />
+          <End Role="tableEstatus" Type="Self.tableEstatus" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="tableWorkflow">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="tableEstatus">
+              <PropertyRef Name="idTableWorkflow" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_tableTasks_TableEstatus">
+          <End Role="tableEstatus" Type="Self.tableEstatus" Multiplicity="0..1" />
+          <End Role="tableTasks" Type="Self.tableTasks" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="tableEstatus">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="tableTasks">
+              <PropertyRef Name="IdTableEstatus" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_tableTasks_TableWorkflow">
+          <End Role="tableWorkflow" Type="Self.tableWorkflow" Multiplicity="0..1" />
+          <End Role="tableTasks" Type="Self.tableTasks" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="tableWorkflow">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="tableTasks">
+              <PropertyRef Name="IdTableWorkflow" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_tableTrack_TableWorkflow">
+          <End Role="tableWorkflow" Type="Self.tableWorkflow" Multiplicity="0..1" />
+          <End Role="tableTracks" Type="Self.tableTracks" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="tableWorkflow">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="tableTracks">
+              <PropertyRef Name="IdTableWorkflow" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="CoreToWorkflowModelStoreContainer">
+          <EntitySet Name="tableEstatus" EntityType="Self.tableEstatus" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="tableTasks" EntityType="Self.tableTasks" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="tableTracks" EntityType="Self.tableTracks" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="tableWorkflow" EntityType="Self.tableWorkflow" Schema="dbo" store:Type="Tables" />
+          <AssociationSet Name="FK_TableEstatus_TableWorkflow" Association="Self.FK_TableEstatus_TableWorkflow">
+            <End Role="tableWorkflow" EntitySet="tableWorkflow" />
+            <End Role="tableEstatus" EntitySet="tableEstatus" />
+          </AssociationSet>
+          <AssociationSet Name="FK_tableTasks_TableEstatus" Association="Self.FK_tableTasks_TableEstatus">
+            <End Role="tableEstatus" EntitySet="tableEstatus" />
+            <End Role="tableTasks" EntitySet="tableTasks" />
+          </AssociationSet>
+          <AssociationSet Name="FK_tableTasks_TableWorkflow" Association="Self.FK_tableTasks_TableWorkflow">
+            <End Role="tableWorkflow" EntitySet="tableWorkflow" />
+            <End Role="tableTasks" EntitySet="tableTasks" />
+          </AssociationSet>
+          <AssociationSet Name="FK_tableTrack_TableWorkflow" Association="Self.FK_tableTrack_TableWorkflow">
+            <End Role="tableWorkflow" EntitySet="tableWorkflow" />
+            <End Role="tableTracks" EntitySet="tableTracks" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema></edmx:StorageModels>
+    <!-- CSDL content -->
+    <edmx:ConceptualModels>
+      <Schema Namespace="CoreToWorkflowModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+        <EntityContainer Name="CoreToWorkflowEntities" annotation:LazyLoadingEnabled="true">
+          <EntitySet Name="tableEstatus" EntityType="CoreToWorkflowModel.tableEstatus" />
+          <EntitySet Name="tableTasks" EntityType="CoreToWorkflowModel.tableTasks" />
+          <EntitySet Name="tableTracks" EntityType="CoreToWorkflowModel.tableTracks" />
+          <EntitySet Name="tableWorkflow" EntityType="CoreToWorkflowModel.tableWorkflow" />
+          <AssociationSet Name="FK_TableEstatus_TableWorkflow" Association="CoreToWorkflowModel.FK_TableEstatus_TableWorkflow">
+            <End Role="tableWorkflow" EntitySet="tableWorkflow" />
+            <End Role="tableEstatus" EntitySet="tableEstatus" />
+          </AssociationSet>
+          <AssociationSet Name="FK_tableTasks_TableEstatus" Association="CoreToWorkflowModel.FK_tableTasks_TableEstatus">
+            <End Role="tableEstatus" EntitySet="tableEstatus" />
+            <End Role="tableTasks" EntitySet="tableTasks" />
+          </AssociationSet>
+          <AssociationSet Name="FK_tableTasks_TableWorkflow" Association="CoreToWorkflowModel.FK_tableTasks_TableWorkflow">
+            <End Role="tableWorkflow" EntitySet="tableWorkflow" />
+            <End Role="tableTasks" EntitySet="tableTasks" />
+          </AssociationSet>
+          <AssociationSet Name="FK_tableTrack_TableWorkflow" Association="CoreToWorkflowModel.FK_tableTrack_TableWorkflow">
+            <End Role="tableWorkflow" EntitySet="tableWorkflow" />
+            <End Role="tableTracks" EntitySet="tableTracks" />
+          </AssociationSet>
+        </EntityContainer>
+        <EntityType Name="tableEstatus">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="idTableWorkflow" Type="Int32" />
+          <Property Name="Name" Type="String" MaxLength="500" FixedLength="false" Unicode="true" />
+          <Property Name="Description" Type="String" MaxLength="500" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="tableWorkflow" Relationship="CoreToWorkflowModel.FK_TableEstatus_TableWorkflow" FromRole="tableEstatus" ToRole="tableWorkflow" />
+          <NavigationProperty Name="tableTasks" Relationship="CoreToWorkflowModel.FK_tableTasks_TableEstatus" FromRole="tableEstatus" ToRole="tableTasks" />
+        </EntityType>
+        <EntityType Name="tableTasks">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="TaskFunction" Type="String" MaxLength="500" FixedLength="false" Unicode="true" />
+          <Property Name="IdTableEstatus" Type="Int32" />
+          <Property Name="Description" Type="String" MaxLength="500" FixedLength="false" Unicode="true" />
+          <Property Name="IdTableWorkflow" Type="Int32" />
+          <NavigationProperty Name="tableEstatus" Relationship="CoreToWorkflowModel.FK_tableTasks_TableEstatus" FromRole="tableTasks" ToRole="tableEstatus" />
+          <NavigationProperty Name="tableWorkflow" Relationship="CoreToWorkflowModel.FK_tableTasks_TableWorkflow" FromRole="tableTasks" ToRole="tableWorkflow" />
+        </EntityType>
+        <EntityType Name="tableTracks">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="CurrentTime" Type="String" MaxLength="500" FixedLength="false" Unicode="true" />
+          <Property Name="IdTableWorkflow" Type="Int32" />
+          <NavigationProperty Name="tableWorkflow" Relationship="CoreToWorkflowModel.FK_tableTrack_TableWorkflow" FromRole="tableTracks" ToRole="tableWorkflow" />
+        </EntityType>
+        <EntityType Name="tableWorkflow">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Name" Type="String" MaxLength="500" FixedLength="false" Unicode="true" />
+          <Property Name="Description" Type="String" MaxLength="500" FixedLength="false" Unicode="true" />
+          <Property Name="Duration" Type="Time" Precision="7" />
+          <NavigationProperty Name="tableEstatus" Relationship="CoreToWorkflowModel.FK_TableEstatus_TableWorkflow" FromRole="tableWorkflow" ToRole="tableEstatus" />
+          <NavigationProperty Name="tableTasks" Relationship="CoreToWorkflowModel.FK_tableTasks_TableWorkflow" FromRole="tableWorkflow" ToRole="tableTasks" />
+          <NavigationProperty Name="tableTracks" Relationship="CoreToWorkflowModel.FK_tableTrack_TableWorkflow" FromRole="tableWorkflow" ToRole="tableTracks" />
+        </EntityType>
+        <Association Name="FK_TableEstatus_TableWorkflow">
+          <End Type="CoreToWorkflowModel.tableWorkflow" Role="tableWorkflow" Multiplicity="0..1" />
+          <End Type="CoreToWorkflowModel.tableEstatus" Role="tableEstatus" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="tableWorkflow">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="tableEstatus">
+              <PropertyRef Name="idTableWorkflow" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_tableTasks_TableEstatus">
+          <End Type="CoreToWorkflowModel.tableEstatus" Role="tableEstatus" Multiplicity="0..1" />
+          <End Type="CoreToWorkflowModel.tableTasks" Role="tableTasks" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="tableEstatus">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="tableTasks">
+              <PropertyRef Name="IdTableEstatus" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_tableTasks_TableWorkflow">
+          <End Type="CoreToWorkflowModel.tableWorkflow" Role="tableWorkflow" Multiplicity="0..1" />
+          <End Type="CoreToWorkflowModel.tableTasks" Role="tableTasks" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="tableWorkflow">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="tableTasks">
+              <PropertyRef Name="IdTableWorkflow" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_tableTrack_TableWorkflow">
+          <End Type="CoreToWorkflowModel.tableWorkflow" Role="tableWorkflow" Multiplicity="0..1" />
+          <End Type="CoreToWorkflowModel.tableTracks" Role="tableTracks" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="tableWorkflow">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="tableTracks">
+              <PropertyRef Name="IdTableWorkflow" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        </Schema>
+    </edmx:ConceptualModels>
+    <!-- C-S mapping content -->
+    <edmx:Mappings>
+      <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+        <EntityContainerMapping StorageEntityContainer="CoreToWorkflowModelStoreContainer" CdmEntityContainer="CoreToWorkflowEntities">
+          <EntitySetMapping Name="tableEstatus">
+            <EntityTypeMapping TypeName="CoreToWorkflowModel.tableEstatus">
+              <MappingFragment StoreEntitySet="tableEstatus">
+                <ScalarProperty Name="Description" ColumnName="Description" />
+                <ScalarProperty Name="Name" ColumnName="Name" />
+                <ScalarProperty Name="idTableWorkflow" ColumnName="idTableWorkflow" />
+                <ScalarProperty Name="Id" ColumnName="Id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="tableTasks">
+            <EntityTypeMapping TypeName="CoreToWorkflowModel.tableTasks">
+              <MappingFragment StoreEntitySet="tableTasks">
+                <ScalarProperty Name="IdTableWorkflow" ColumnName="IdTableWorkflow" />
+                <ScalarProperty Name="Description" ColumnName="Description" />
+                <ScalarProperty Name="IdTableEstatus" ColumnName="IdTableEstatus" />
+                <ScalarProperty Name="TaskFunction" ColumnName="TaskFunction" />
+                <ScalarProperty Name="Id" ColumnName="Id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="tableTracks">
+            <EntityTypeMapping TypeName="CoreToWorkflowModel.tableTracks">
+              <MappingFragment StoreEntitySet="tableTracks">
+                <ScalarProperty Name="IdTableWorkflow" ColumnName="IdTableWorkflow" />
+                <ScalarProperty Name="CurrentTime" ColumnName="CurrentTime" />
+                <ScalarProperty Name="Id" ColumnName="Id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="tableWorkflow">
+            <EntityTypeMapping TypeName="CoreToWorkflowModel.tableWorkflow">
+              <MappingFragment StoreEntitySet="tableWorkflow">
+                <ScalarProperty Name="Duration" ColumnName="Duration" />
+                <ScalarProperty Name="Description" ColumnName="Description" />
+                <ScalarProperty Name="Name" ColumnName="Name" />
+                <ScalarProperty Name="Id" ColumnName="Id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+        </EntityContainerMapping>
+      </Mapping>
+    </edmx:Mappings>
+  </edmx:Runtime>
+  <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <Connection>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="MetadataArtifactProcessing" Value="EmbedInOutputAssembly" />
+      </DesignerInfoPropertySet>
+    </Connection>
+    <Options>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="ValidateOnBuild" Value="true" />
+        <DesignerProperty Name="EnablePluralization" Value="false" />
+        <DesignerProperty Name="IncludeForeignKeysInModel" Value="true" />
+        <DesignerProperty Name="UseLegacyProvider" Value="false" />
+        <DesignerProperty Name="CodeGenerationStrategy" Value="Ninguno" />
+      </DesignerInfoPropertySet>
+    </Options>
+    <!-- Diagram content (shape and connector positions) -->
+    <Diagrams></Diagrams>
+  </Designer>
+</edmx:Edmx>

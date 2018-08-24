@@ -1,0 +1,45 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+  <EntityContainerMapping StorageEntityContainer="CoreToWorkflowModelStoreContainer" CdmEntityContainer="CoreToWorkflowEntities">
+    <EntitySetMapping Name="tableEstatus">
+      <EntityTypeMapping TypeName="CoreToWorkflowModel.tableEstatus">
+        <MappingFragment StoreEntitySet="tableEstatus">
+          <ScalarProperty Name="Description" ColumnName="Description" />
+          <ScalarProperty Name="Name" ColumnName="Name" />
+          <ScalarProperty Name="idTableWorkflow" ColumnName="idTableWorkflow" />
+          <ScalarProperty Name="Id" ColumnName="Id" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="tableTasks">
+      <EntityTypeMapping TypeName="CoreToWorkflowModel.tableTasks">
+        <MappingFragment StoreEntitySet="tableTasks">
+          <ScalarProperty Name="IdTableWorkflow" ColumnName="IdTableWorkflow" />
+          <ScalarProperty Name="Description" ColumnName="Description" />
+          <ScalarProperty Name="IdTableEstatus" ColumnName="IdTableEstatus" />
+          <ScalarProperty Name="TaskFunction" ColumnName="TaskFunction" />
+          <ScalarProperty Name="Id" ColumnName="Id" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="tableTracks">
+      <EntityTypeMapping TypeName="CoreToWorkflowModel.tableTracks">
+        <MappingFragment StoreEntitySet="tableTracks">
+          <ScalarProperty Name="IdTableWorkflow" ColumnName="IdTableWorkflow" />
+          <ScalarProperty Name="CurrentTime" ColumnName="CurrentTime" />
+          <ScalarProperty Name="Id" ColumnName="Id" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="tableWorkflow">
+      <EntityTypeMapping TypeName="CoreToWorkflowModel.tableWorkflow">
+        <MappingFragment StoreEntitySet="tableWorkflow">
+          <ScalarProperty Name="Duration" ColumnName="Duration" />
+          <ScalarProperty Name="Description" ColumnName="Description" />
+          <ScalarProperty Name="Name" ColumnName="Name" />
+          <ScalarProperty Name="Id" ColumnName="Id" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+  </EntityContainerMapping>
+</Mapping>

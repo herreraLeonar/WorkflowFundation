@@ -1,0 +1,7 @@
+C:\Users\Leonar\source\repos\CoreToWorkflow\Rextester\bin\Debug\Rextester.exe.config
+C:\Users\Leonar\source\repos\CoreToWorkflow\Rextester\bin\Debug\Rextester.exe
+C:\Users\Leonar\source\repos\CoreToWorkflow\Rextester\bin\Debug\Rextester.pdb
+C:\Users\Leonar\source\repos\CoreToWorkflow\Rextester\obj\Debug\Rextester.csprojAssemblyReference.cache
+C:\Users\Leonar\source\repos\CoreToWorkflow\Rextester\obj\Debug\Rextester.csproj.CoreCompileInputs.cache
+C:\Users\Leonar\source\repos\CoreToWorkflow\Rextester\obj\Debug\Rextester.exe
+C:\Users\Leonar\source\repos\CoreToWorkflow\Rextester\obj\Debug\Rextester.pdb

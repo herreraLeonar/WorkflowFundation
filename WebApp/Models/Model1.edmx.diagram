@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+ <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <!-- Diagram content (shape and connector positions) -->
+    <edmx:Diagrams>
+      <Diagram DiagramId="ffe83689104a459e9454e1eb1606e8d4" Name="Diagram1">
+        <EntityTypeShape EntityType="CoreToWorkflowModel.tableEstatus" Width="1.5" PointX="3" PointY="3.75" />
+        <EntityTypeShape EntityType="CoreToWorkflowModel.tableTasks" Width="1.5" PointX="5.25" PointY="2.875" />
+        <EntityTypeShape EntityType="CoreToWorkflowModel.tableTracks" Width="1.5" PointX="3" PointY="1.125" />
+        <EntityTypeShape EntityType="CoreToWorkflowModel.tableWorkflow" Width="1.5" PointX="0.75" PointY="2.375" />
+        <AssociationConnector Association="CoreToWorkflowModel.FK_TableEstatus_TableWorkflow" />
+        <AssociationConnector Association="CoreToWorkflowModel.FK_tableTasks_TableEstatus" />
+        <AssociationConnector Association="CoreToWorkflowModel.FK_tableTasks_TableWorkflow" />
+        <AssociationConnector Association="CoreToWorkflowModel.FK_tableTrack_TableWorkflow" />
+      </Diagram>
+    </edmx:Diagrams>
+  </edmx:Designer>
+</edmx:Edmx>
